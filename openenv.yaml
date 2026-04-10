@@ -1,0 +1,11 @@
+name: incident_triage
+version: "1.0.0"
+description: "SRE Simulator for server incident response"
+entry_point: "src.environment:IncidentEnv"
+tasks:
+  - id: disk_full_easy
+    difficulty: easy
+  - id: service_crash_medium
+    difficulty: medium
+  - id: cascading_failure_hard
+    difficulty: hard
