@@ -1,5 +1,18 @@
 import os
 import sys
+import subprocess
+
+# Auto-install required packages if the validator runs without pip install
+_REQUIRED = ["openai", "pydantic"]
+for _pkg in _REQUIRED:
+    try:
+        __import__(_pkg)
+    except ImportError:
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", _pkg, "-q"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
 
 # Ensure project root is in path before any local imports
 _root = os.path.dirname(os.path.abspath(__file__))
