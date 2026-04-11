@@ -138,7 +138,8 @@ async def run_task(client: OpenAI, task_id: str) -> None:
                 break
 
         total = sum(rewards)
-        score = max(0.0, min(1.0, total))
+        # Clamp to open interval (0, 1) — validator rejects 0.0 and 1.0 exactly
+        score = max(0.001, min(0.999, total))
         success = score > 0.0
 
     finally:
